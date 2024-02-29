@@ -1,16 +1,18 @@
 import math
 from tkinter import *
 
+#creating the window
 root = Tk()
 root.title("Calculator")
 
-# Global variables to store the first operand and the current operation
+# Global variables 
 first_operand = None
 current_operation = None
 op_bool = False
 result = None
 
 
+#function to print the number in the entry after clicking it
 def add_num(num):
     global first_operand, current_operation, op_bool
     now = en.get()
@@ -26,6 +28,7 @@ def add_num(num):
             en.insert(0, now + num)
 
 
+#function for del button
 def delete():
     current_text = en.get()
     if current_text:
@@ -34,9 +37,9 @@ def delete():
             en.insert(0, '0')
 
 
+#function to make the operation after clicking it
 def operation(op):
     global first_operand, current_operation, op_bool, result
-
     if op == 'C':
         en.delete(0, END)
         first_operand = None
@@ -72,12 +75,12 @@ def operation(op):
             first_operand = float(en.get())
         op_bool = True
 
-
+#creating entry field
 en = Entry(root, width=22, borderwidth=5, background="#B9B9B9", fg="black", font="bold")
 en.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
 en.insert(0, '0')
 
-# create number buttons
+# create numbers buttons
 numbers_buttons = []
 number_positions = [(3, 0), (3, 1), (3, 2), (2, 0), (2, 1), (2, 2), (1, 0), (1, 1), (1, 2)]
 for i in range(1, 10):
@@ -100,12 +103,13 @@ for i in range(5):
                              background="#DF8100", fg="white", font="bold",
                              command=lambda op=operations_signs[i]: operation(op)).
                       grid(row=operations_positions[i][0], column=operations_positions[i][1]))
-
+#clear button 
 clear = Button(root, text='C', padx=30, pady=15, borderwidth=3,
                background="#B1B1B1", fg="black", font="bold",
                command=lambda: operation('C'))
 clear.grid(row=4, column=1)
 
+#delete button
 dl = Button(root, text='Del', padx=20, pady=15, borderwidth=3,
             background="#B1B1B1", fg="black", font="bold",
             command=delete)
